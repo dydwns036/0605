@@ -26,8 +26,8 @@ public interface APIService {
     @POST("login")
     Call<User> login(@Body LoginRequest loginRequest);
 
-    @GET("user/{useraccname}")
-    Call<UserResponse> getUser(@Path("useraccname") String useraccname);
+    @GET("user/{account}")
+    Call<UserResponse> getUser(@Path("account") String useraccname);
 
     @POST("signup")
     Call<Void> signup(@Body SignupRequest signupRequest);

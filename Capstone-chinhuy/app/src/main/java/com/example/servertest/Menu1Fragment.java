@@ -138,6 +138,11 @@ public class Menu1Fragment extends Fragment {
             public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<String> imageUrls = response.body().getAdvertisement();
+                    if (imageUrls == null || imageUrls.isEmpty()) {
+                        Log.e("Menu1Fragment", "Image URL list is null or empty");
+                    } else {
+                        Log.d("Menu1Fragment", "Image URLs: " + imageUrls.toString());
+                    }
                     setupViewFlipper(imageUrls);
                 } else {
                     Toast.makeText(getActivity(), "Failed to retrieve advertisement images", Toast.LENGTH_SHORT).show();
@@ -149,7 +154,7 @@ public class Menu1Fragment extends Fragment {
             @Override
             public void onFailure(Call<ImageResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("Network error: ", t.getMessage());
+                Log.e("Network error", t.getMessage(), t);
                 setupViewFlipper(new ArrayList<>());  // Call with empty list to avoid null issues
             }
         });
@@ -179,7 +184,7 @@ public class Menu1Fragment extends Fragment {
                     Log.e("Picasso error", "Error loading image: " + url, e);
                 }
             });
-            Log.e("ViewFlipper", url);
+            Log.d("ViewFlipper", "Image URL: " + url);
         }
         viewFlipper.setFlipInterval(5000);
         viewFlipper.setAutoStart(true);

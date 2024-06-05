@@ -19,7 +19,7 @@ public class Post implements Serializable {
     private int commentCount;
 
 
-
+//데이터베이스 속성의 이름과 같아야 함
     public int getPostId() {return post_id;}
 
     public int getId() {
